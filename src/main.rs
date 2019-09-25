@@ -1,3 +1,5 @@
+extern crate ctrlc;
+
 use std::io::{self, Write};
 use std::env;
 use std::path::Path;
@@ -19,6 +21,9 @@ fn builtin(cmds: &Vec<&str>) -> i32 {
 }
 
 fn main() {
+    ctrlc::set_handler(move || {
+    }).expect("Error setting ctrlc handler");
+
     // start shell in /
     let root = Path::new("/");
     env::set_current_dir(&root).unwrap();
